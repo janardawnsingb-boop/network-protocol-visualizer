@@ -1,0 +1,463 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    background: #07111f;
+    color: #eaf2ff;
+}
+
+header {
+    padding: 34px 7%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 1px solid #1c2b3e;
+    background: #0a1626;
+}
+
+.eyebrow {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #7da8d8;
+    font-weight: 800;
+}
+
+h1 {
+    margin: 8px 0;
+    font-size: 38px;
+}
+
+header p {
+    margin: 0;
+    color: #9db0c7;
+}
+
+.status {
+    border: 1px solid #29425e;
+    border-radius: 999px;
+    padding: 10px 16px;
+    color: #a9c4e2;
+    font-size: 13px;
+}
+
+.status span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 28px 5% 60px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.controls button {
+    border: 1px solid #2a405a;
+    background: #101f31;
+    color: #dceaff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.controls button:hover {
+    background: #183452;
+    border-color: #4d80b3;
+}
+
+.controls .active {
+    background: #183452;
+    border-color: #4d80b3;
+}
+
+/* =========================
+   MAIN VISUALIZATION
+   ========================= */
+
+.hero {
+    background: linear-gradient(145deg, #0c1a2b, #0a1422);
+    border: 1px solid #20344c;
+    border-radius: 18px;
+    padding: 45px 25px;
+    min-height: 300px;
+}
+
+.diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+/* =========================
+   CLIENT / SERVER
+   ========================= */
+
+.node {
+    width: 175px;
+    text-align: center;
+    padding: 22px 10px;
+    border: 1px solid #304964;
+    border-radius: 16px;
+    background: #102237;
+    box-shadow: 0 12px 30px #0004;
+    flex-shrink: 0;
+}
+
+.icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.node b {
+    font-size: 16px;
+}
+
+.node small {
+    display: block;
+    color: #8da3bb;
+    margin-top: 5px;
+}
+
+/* =========================
+   NETWORK LANE
+   ========================= */
+
+.lane {
+    position: relative;
+    width: 48%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Network cable */
+
+.wire {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 57px;
+    height: 4px;
+    width: 100%;
+    background: #36536f;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+/* Application label */
+
+.app {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #122c45;
+    border: 1px solid #315d86;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #a9d2ff;
+    z-index: 4;
+    white-space: nowrap;
+}
+
+/* Protocol badge */
+
+.protocol-badge {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #1b334b;
+    border: 1px solid #4a7197;
+    font-weight: 800;
+    font-size: 12px;
+    z-index: 4;
+    white-space: nowrap;
+}
+
+/* =========================
+   PACKETS
+   ========================= */
+
+.packet {
+    position: absolute;
+    left: 0;
+    top: 48px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 5px;
+
+    background: #7cc4ff;
+
+    z-index: 3;
+
+    opacity: 0;
+
+    box-shadow:
+        0 0 8px #7cc4ff,
+        0 0 18px #7cc4ff,
+        0 0 30px #7cc4ff;
+
+    pointer-events: none;
+}
+
+/* Different packets */
+
+.p1 {
+    top: 48px;
+}
+
+.p2 {
+    top: 48px;
+}
+
+.p3 {
+    top: 48px;
+}
+
+/* =========================
+   PACKET ANIMATION
+   ========================= */
+
+.packet.go {
+    animation: travel 2s linear infinite;
+}
+
+/* First packet */
+
+.p1.go {
+    animation-delay: 0s;
+}
+
+/* Second packet */
+
+.p2.go {
+    animation-delay: 0.35s;
+}
+
+/* Third packet */
+
+.p3.go {
+    animation-delay: 0.7s;
+}
+
+@keyframes travel {
+
+    0% {
+        left: 0;
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    30% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        left: calc(100% - 18px);
+        opacity: 0;
+        transform: scale(0.7);
+    }
+}
+
+/* =========================
+   STEP SECTION
+   ========================= */
+
+.steps {
+    margin-top: 24px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.section-title span:last-child {
+    color: #7e9ab8;
+    font-size: 13px;
+}
+
+.step-card {
+    display: none;
+    padding: 20px;
+    border: 1px solid #29415c;
+    border-radius: 14px;
+    background: #0e1d2e;
+}
+
+.step-card.show {
+    display: block;
+}
+
+.step-card h3 {
+    margin: 0 0 7px;
+}
+
+.step-card p {
+    color: #a9b9cc;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================
+   DASHBOARD
+   ========================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.panel {
+    background: #0b1929;
+    border: 1px solid #20354d;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.panel h2,
+.comparison h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.logline {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    padding: 9px;
+    border-bottom: 1px solid #182a3d;
+    color: #9fc5e9;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 11px 0;
+    border-bottom: 1px solid #1a2c40;
+    color: #9eb0c4;
+}
+
+.detail-row b {
+    color: #e5f0ff;
+}
+
+/* =========================
+   COMPARISON TABLE
+   ========================= */
+
+.comparison {
+    margin-top: 24px;
+    background: #0b1929;
+    border: 1px solid #20354d;
+    border-radius: 16px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 13px;
+    border-bottom: 1px solid #20354d;
+}
+
+th {
+    color: #8fb5db;
+}
+
+td {
+    color: #b9c8d8;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+@media (max-width: 760px) {
+
+    header {
+        display: block;
+    }
+
+    .status {
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .diagram {
+        flex-direction: column;
+    }
+
+    .lane {
+        width: 90%;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .hero {
+        padding: 30px 15px;
+    }
+}

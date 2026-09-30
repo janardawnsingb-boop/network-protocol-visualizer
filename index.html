@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Network Protocol Visualizer</title>
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">COMPUTER NETWORKS PROJECT</div>
+    <h1>Protocol Flow Visualizer</h1>
+    <p>See how <b>Email</b> uses TCP and how modern <b>HTTP/3 browsing</b> uses UDP through QUIC.</p>
+  </div>
+  <div class="status"><span></span> Interactive Demo</div>
+</header>
+
+<main>
+<section class="controls">
+  <button class="mode active" data-mode="mail">✉ Mail — TCP</button>
+  <button class="mode" data-mode="web">🌐 Browsing — UDP + QUIC</button>
+  <button id="play">▶ Play Animation</button>
+  <button id="reset">↻ Reset</button>
+</section>
+
+<section class="hero">
+  <div class="diagram">
+    <div class="node" id="client"><div class="icon">💻</div><b>Your Device</b><small>Client</small></div>
+    <div class="lane">
+      <div class="layer app" id="appLayer">Application</div>
+      <div class="packet p1"></div>
+      <div class="packet p2"></div>
+      <div class="packet p3"></div>
+      <div class="wire"></div>
+      <div class="protocol-badge" id="protocolBadge">TCP</div>
+    </div>
+    <div class="node" id="server"><div class="icon">🖥️</div><b id="serverName">Mail Server</b><small id="serverSub">SMTP / IMAP / POP3</small></div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="section-title"><span>How it works</span><span id="stepCounter">Step 1 of 5</span></div>
+  <div id="stepCards"></div>
+</section>
+
+<section class="dashboard">
+  <div class="panel">
+    <h2>Live Packet Log</h2>
+    <div id="log"></div>
+  </div>
+  <div class="panel">
+    <h2>Protocol Details</h2>
+    <div id="details"></div>
+  </div>
+</section>
+
+<section class="comparison">
+  <h2>Mail vs Modern Web Browsing</h2>
+  <table>
+    <thead><tr><th>Feature</th><th>Email</th><th>HTTP/3 Browsing</th></tr></thead>
+    <tbody>
+      <tr><td>Transport</td><td><strong>TCP</strong></td><td><strong>UDP</strong> (via QUIC)</td></tr>
+      <tr><td>Application protocols</td><td>SMTP / IMAP / POP3</td><td>HTTP/3</td></tr>
+      <tr><td>Connection</td><td>TCP connection + handshake</td><td>QUIC connection over UDP</td></tr>
+      <tr><td>Reliability</td><td>TCP provides ordered, reliable delivery</td><td>QUIC provides reliability above UDP</td></tr>
+      <tr><td>Typical purpose</td><td>Sending and retrieving email</td><td>Modern web pages and web applications</td></tr>
+    </tbody>
+  </table>
+</section>
+</main>
+<script src="static/app.js"></script>
+</body>
+</html>
